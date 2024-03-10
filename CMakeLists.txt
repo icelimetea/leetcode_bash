@@ -11,13 +11,9 @@ set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE TRUE)
 
 set(CMAKE_C_FLAGS_DEBUG "-O2 -ggdb")
 
-add_link_options("$<$<CONFIG:Release>:LINKER:--strip-all,--nmagic,-T,${CMAKE_SOURCE_DIR}/linker.ld>")
+add_link_options("$<$<CONFIG:Release>:LINKER:--strip-all,--nmagic,-T,${CMAKE_SOURCE_DIR}/linker.ld,-z,nosectionheader>")
 
 include_directories(include)
-
-function(strip_section_headers elf_target)
-  add_custom_command(TARGET ${elf_target} POST_BUILD COMMAND llvm-objcopy ARGS --strip-all --strip-sections "$<TARGET_FILE:${elf_target}>")
-endfunction()
 
 add_subdirectory(phone_numbers)
 add_subdirectory(tenth_line)
