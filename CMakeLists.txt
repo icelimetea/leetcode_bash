@@ -11,7 +11,7 @@ set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE TRUE)
 
 set(CMAKE_C_FLAGS_DEBUG "-O2 -ggdb")
 
-add_link_options("$<$<CONFIG:Release>:LINKER:--strip-all,--nmagic,-T,${CMAKE_SOURCE_DIR}/linker.ld,-z,nosectionheader>")
+add_link_options("$<$<CONFIG:Release>:LINKER:--strip-all,--nmagic,--orphan-handling=warn,-T,${CMAKE_SOURCE_DIR}/linker.ld,-z,nosectionheader>")
 
 include_directories(include)
 
